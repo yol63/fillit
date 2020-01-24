@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 15:55:45 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/24 16:13:32 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/24 18:40:43 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int				ft_move(t_tetraminka *tetra, int razmer, char **map)
 	y0 = start_coord[1];
 	free(start_coord);
 	ft_dostat(map, razmer, tetra);
-	while (y0 + 1 < razmer)
+	while (y0 < razmer)
 	{
-		if (x0 + 1 < razmer)
+		if (x0 < razmer)
 			x0++;
-		else if (y0 + 1 < razmer)
+		else if (y0 < razmer)
 		{
 			y0++;
 			x0 = 0;
