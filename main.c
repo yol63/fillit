@@ -5,112 +5,94 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/26 21:41:30 by romarash          #+#    #+#             */
-/*   Updated: 2019/11/26 21:41:33 by romarash         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:31:36 by romarash          #+#    #+#             */
-/*   Updated: 2019/11/26 18:32:42 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:32:26 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <get_next_line.h>
-# include <fillit.h>
+#include "fillit.h"
 
-void    ft_lstiters(t_tetraminka *list, void (*f)(t_tetraminka *elem))
+void	ft_create_new_tetramino(int *k, t_tetraminka **tetra,
+		char **line, int fd)
 {
-    t_tetraminka *newlist;
-    
-    newlist = NULL;
-    if (!list || !f)
-        return ;
-    newlist = list;
-    while (newlist)
-    {
-        ft_putstr("tetraminka\n");
-        f(newlist);
-        newlist = newlist->next;
-    }
+	t_tetraminka *new_tetramino;
+
+	*k = 0;
+	new_tetramino = ft_lstnews();
+	new_tetramino->c = (*tetra)->c + 1;
+	(*tetra)->next = new_tetramino;
+	new_tetramino->last = *tetra;
+	*tetra = new_tetramino;
+	free(*line);
+	*line = NULL;
+	get_next_line(fd, line);
 }
 
-void ft_write(t_tetraminka *start)
+void	ft_save_coord(int *i, int *j, int *k, t_tetraminka *tetramino)
 {
-    int res;
-    int i = 0;
-    
-    while (i < 8) {
-        
-        res = start->coord[i];
-        ft_putnbr(res);
-        ft_putchar(start->c);
-        ft_putchar('\n');
-        i++;
-    }
+	tetramino->coord[*k] = *i + 1;
+	tetramino->coord[*k + 1] = *j + 1;
+	*k = *k + 2;
 }
 
-
-int    main(int argc, char **argv)
+void	ft_free_line(char *line)
 {
-    int fd;
-    char *line;
-    int i = 0;
-    int j = 0;
-    int k = 0;
-    int res;
-    t_tetraminka *tetramino;
-    t_tetraminka *new_tetramino;
-    t_tetraminka *start;
-    
-    
-    if (argc != 2  /* || ft_validation(argv[1] == 0)*/)
-        ft_putstr("ERROR\n");
-    
-    fd = open(argv[1], O_RDONLY);
-    tetramino = malloc(sizeof(t_tetraminka));
-    start = tetramino;
-    tetramino->coord = (int*)malloc (sizeof(int) * 8);
-    tetramino->c = 'A';
-    tetramino->next = NULL;
-    while (get_next_line(fd, &line) == 1)
-    {
-        i = 0;
-        while (line[i])
-        {
-            if (line[i] == '#')
-            {
-                tetramino->coord[k] = i + 1;
-                tetramino->coord[k + 1] = j + 1;
-                k = k + 2;
-            }
-            i++;
-        }
-        j++;
-        if (j == 5)
-        {
-            j = 0;
-            k = 0;
-            new_tetramino = malloc(sizeof(t_tetraminka));
-            new_tetramino->coord = (int*)malloc (sizeof(int) * 8);
-            new_tetramino->next = NULL;
-            new_tetramino->c = tetramino->c + 1;
-            tetramino->next = new_tetramino;
-            tetramino = new_tetramino;
-        }
-        free(line);
-        line = NULL;
-    }
-    i = 0;
-    ft_lstiters(start, ft_write);
-    return (0);
+	free(line);
+	line = NULL;
+}
+
+void	ft_save_tetramino(int fd, t_tetraminka *tetra)
+{
+	char	*line;
+	int		i;
+	int		j;
+	int		k;
+
+	j = 0;
+	k = 0;
+	while (get_next_line(fd, &line) == 1)
+	{
+		i = 0;
+		while (line[i])
+		{
+			if (line[i] == '#')
+				ft_save_coord(&i, &j, &k, tetra);
+			i++;
+		}
+		j++;
+		if (j == 4)
+		{
+			j = 0;
+			ft_create_new_tetramino(&k, &tetra, &line, fd);
+		}
+		ft_free_line(line);
+	}
+	ft_free_line(line);
+}
+
+int		main(int argc, char **argv)
+{
+	int				fd;
+	t_tetraminka	*tetra;
+	t_tetraminka	*start;
+	char			**map;
+
+	if (argc != 2)
+		ft_error(1);
+	if (setup(argv) <= 0)
+		ft_error(2);
+	fd = open(argv[1], O_RDONLY);
+	tetra = ft_lstnews();
+	start = tetra;
+	tetra->c = 'A';
+	ft_save_tetramino(fd, tetra);
+	if (ft_count_tetra(start) > 26)
+		ft_error(2);
+	ft_lstiters(start, ft_coord_to_null);
+	map = ft_putt(start, 2);
+	ft_write_arr(map);
+	ft_lstdels(&start);
+	ft_free_arr(map);
+	close(fd);
+	return (0);
 }
