@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:31:36 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/24 16:32:26 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/24 16:51:34 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_save_tetramino(int fd, t_tetraminka *tetra)
 int		main(int argc, char **argv)
 {
 	int				fd;
+	int				n;
 	t_tetraminka	*tetra;
 	t_tetraminka	*start;
 	char			**map;
@@ -86,10 +87,10 @@ int		main(int argc, char **argv)
 	start = tetra;
 	tetra->c = 'A';
 	ft_save_tetramino(fd, tetra);
-	if (ft_count_tetra(start) > 26)
+	if ((n = ft_count_tetra(start)) > 26)
 		ft_error(2);
 	ft_lstiters(start, ft_coord_to_null);
-	map = ft_putt(start, 2);
+	map = ft_putt(start, ft_sqrt(n * 4));
 	ft_write_arr(map);
 	ft_lstdels(&start);
 	ft_free_arr(map);

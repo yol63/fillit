@@ -64,6 +64,7 @@ SRC	= 	ft_memset.c \
 		ft_free_arr.c \
 		ft_islower.c \
 		ft_isupper.c \
+		ft_sqrt.c \
 		ft_isspace.c
 
 OBJ	= $(SRC:%.c=%.o)
