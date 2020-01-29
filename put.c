@@ -44,7 +44,7 @@ int				ft_move(t_tetraminka *tetra, int razmer, char **map)
 	ft_dostat(map, razmer, tetra);
 	while (y0 < razmer)
 	{
-		if (x0 < razmer)
+		if (x0 + 1 < razmer)
 			x0++;
 		else if (y0 < razmer)
 		{

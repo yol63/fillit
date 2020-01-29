@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:47:19 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/24 16:28:49 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:07:45 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void			ft_create_new_tetramino(int *k, t_tetraminka **tetra,
 		char **line, int fd);
 void			ft_save_tetramino(int fd, t_tetraminka *tetra);
 void			ft_save_coord(int *i, int *j, int *k, t_tetraminka *tetramino);
-void			ft_free_line(char *line);
+void			ft_free_line(char **line);
 int				ft_count_tetra(t_tetraminka *list);
+int				check_lines(char *input);
 
 #endif

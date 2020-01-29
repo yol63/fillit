@@ -35,10 +35,10 @@ void	ft_save_coord(int *i, int *j, int *k, t_tetraminka *tetramino)
 	*k = *k + 2;
 }
 
-void	ft_free_line(char *line)
+void	ft_free_line(char **line)
 {
-	free(line);
-	line = NULL;
+	free(*line);
+	*line = NULL;
 }
 
 void	ft_save_tetramino(int fd, t_tetraminka *tetra)
@@ -65,9 +65,9 @@ void	ft_save_tetramino(int fd, t_tetraminka *tetra)
 			j = 0;
 			ft_create_new_tetramino(&k, &tetra, &line, fd);
 		}
-		ft_free_line(line);
+		ft_free_line(&line);
 	}
-	ft_free_line(line);
+	ft_free_line(&line);
 }
 
 int		main(int argc, char **argv)
@@ -80,7 +80,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error(1);
-	if (setup(argv) <= 0)
+	if (setup(argv) <= 0 || check_lines(argv[1]) <= 0)
 		ft_error(2);
 	fd = open(argv[1], O_RDONLY);
 	tetra = ft_lstnews();

@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:29:27 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/22 22:45:46 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:03:04 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			creation(int fd)
 	int			rd;
 	char		*line;
 
-	line = ((char*)malloc(sizeof(char) * (BUFF_SIZEE + 1)));
+	line = ft_strnew(BUFF_SIZEE);
 	if ((rd = read(fd, line, BUFF_SIZEE)) == 0)
 	{
 		free(line);
@@ -104,12 +104,12 @@ int			creation(int fd)
 	ft_line(line, rd);
 	while (rd == 20)
 	{
-		line = ((char*)malloc(sizeof(char) * 2));
+		line = ft_strnew(1);
 		rd = read(fd, line, 1);
 		free(line);
 		if (rd == 0)
 			return (1);
-		line = ((char*)malloc(sizeof(char) * (BUFF_SIZEE + 1)));
+		line = ft_strnew(BUFF_SIZEE);
 		rd = read(fd, line, BUFF_SIZEE);
 		ft_line(line, rd);
 	}

@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:26:45 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/24 16:38:10 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/29 13:07:08 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,41 @@ void	ft_error(int error)
 		ft_putstr("error\n");
 		exit(1);
 	}
+}
+
+int		ft_return(int fd, char **buf, int r)
+{
+	free(*buf);
+	buf = NULL;
+	close(fd);
+	return (r);
+}
+
+int		check_lines(char *input)
+{
+	int		fd;
+	char	*buf;
+	int		i;
+	int		count;
+
+	fd = open(input, O_RDONLY);
+	i = 1;
+	count = 0;
+	while (get_next_line(fd, &buf))
+	{
+		if (i % 5 != 0 && (ft_strlen(buf) != 4))
+			return (ft_return(fd, &buf, 0));
+		if ((i % 5) == 0)
+			count = 0;
+		else
+			count++;
+		if (i % 5 == 0 && (ft_strlen(buf) != 0))
+			return (ft_return(fd, &buf, 0));
+		i++;
+		free(buf);
+	}
+	if (count != 4)
+		return (ft_return(fd, &buf, 0));
+	close(fd);
+	return (ft_return(fd, &buf, 1));
 }
