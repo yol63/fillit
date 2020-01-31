@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:29:27 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/29 13:03:04 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/31 18:23:41 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		check_file(char *line)
 	}
 	if (hcount != 4 || dcount != 12 || ncount != 4 || line[0] == '\n')
 	{
-		write(1, "error\n", 7);
+		write(1, "error\n", 6);
 		exit(1);
 	}
 	return ;
@@ -47,7 +47,7 @@ void		touch_validate(int touch, char *line)
 		return ;
 	else
 	{
-		write(1, "error\n", 7);
+		write(1, "error\n", 6);
 		free(line);
 		exit(1);
 	}
@@ -80,9 +80,8 @@ void		check_figure(char *line)
 	touch_validate(touch, line);
 }
 
-void		ft_line(char *line, int rd)
+void		ft_line(char *line)
 {
-	line[rd] = '\0';
 	check_file(line);
 	check_figure(line);
 	free(line);
@@ -95,25 +94,25 @@ int			creation(int fd)
 	int			rd;
 	char		*line;
 
-	line = ft_strnew(BUFF_SIZEE);
+	if (!(line = ft_strnew(BUFF_SIZEE)))
+		ft_error(2);
 	if ((rd = read(fd, line, BUFF_SIZEE)) == 0)
-	{
-		free(line);
-		return (0);
-	}
-	ft_line(line, rd);
+		return (ft_return(fd, &line, 0));
+	ft_line(line);
 	while (rd == 20)
 	{
-		line = ft_strnew(1);
-		rd = read(fd, line, 1);
+		if (!(line = ft_strnew(1)))
+			ft_error(2);
+		if ((rd = read(fd, line, 1)) < 0)
+			ft_error(2);
 		free(line);
 		if (rd == 0)
 			return (1);
-		line = ft_strnew(BUFF_SIZEE);
-		rd = read(fd, line, BUFF_SIZEE);
-		ft_line(line, rd);
+		if (!(line = ft_strnew(BUFF_SIZEE)))
+			ft_error(2);
+		if ((rd = read(fd, line, BUFF_SIZEE)) < 0)
+			ft_error(2);
+		ft_line(line);
 	}
-	if ((rd = read(fd, line, BUFF_SIZEE)) == 0)
-		return (1);
 	return (0);
 }

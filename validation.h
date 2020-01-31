@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:20:26 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/22 22:42:45 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/30 18:27:29 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void					ft_error(int error);
 int						creation(int fd);
 void					ft_checkfig(char *line, int *j, int *t);
 void					touch_validate(int touch, char *line);
+int						ft_return(int fd, char **buf, int r);
 
 #endif

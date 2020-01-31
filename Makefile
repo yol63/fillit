@@ -1,6 +1,10 @@
 NAME = fillit
 
-LIB_PATH = libft/
+LIB_PATH = ./libft
+
+LIBFT = ./libft/libft.a
+
+HEAD = ./
 
 SRC =	get_next_line.c \
 	list.c \
@@ -20,10 +24,11 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C libft/ fclean && make -C libft/
-	gcc $(FLAGS) -c $(SRC) -I ./ 
-	gcc $(FLAGS) -o $(NAME) $(OBJ) -L $(LIB_PATH) -lft
+$(NAME): $(OBJ) $(LIBFT)
+	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) -I $(LIB_PATH)
+
+$(LIBFT):
+	make -C libft/
 
 clean:
 	/bin/rm -f $(OBJ)

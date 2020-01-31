@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:26:45 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/29 13:07:08 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/30 18:34:34 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_error(int error)
 {
 	if (error == 1)
 	{
-		ft_putstr("usage: ./fillit test.txt\n");
+		ft_putstr("usage: fillit source_file\n");
 		exit(1);
 	}
 	if (error == 2)
@@ -90,6 +90,5 @@ int		check_lines(char *input)
 	}
 	if (count != 4)
 		return (ft_return(fd, &buf, 0));
-	close(fd);
 	return (ft_return(fd, &buf, 1));
 }
