@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 14:42:36 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/24 17:03:40 by romarash         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:12:52 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_sqrt(int nb)
 		return (0);
 	while (nb != 0)
 	{
-		while (res < nb / 2)
+		while (res <= nb / 2)
 		{
 			if (res * res == nb)
 				return (res);

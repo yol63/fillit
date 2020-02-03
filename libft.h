@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:09:50 by romarash          #+#    #+#             */
-/*   Updated: 2020/02/01 19:55:07 by romarash         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:43:04 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int					ft_strequ(char const *s1, char const *s2);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
 void				ft_putstr(char const *s);
-int					ft_putchar(int c);
+void				ft_putchar(char c);
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_memdel(void **ap);
 void				*ft_memalloc(size_t size);

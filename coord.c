@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 15:27:23 by romarash          #+#    #+#             */
-/*   Updated: 2019/12/07 15:55:03 by romarash         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:39:20 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int		ft_put_1tetraminka(t_tetraminka *start, char **map, int x0, int y0)
 	{
 		x = start->coord[i];
 		y = start->coord[i + 1];
-		if ((map[y + y0] != NULL) && (map[y + y0][x + x0] == '.'))
+		if ((map[y + y0] != NULL) && (x + x0 <= ft_strlen(map[y + y0]))
+				&& (map[y + y0][x + x0] == '.'))
 			i = i + 2;
 		else
 			return (0);
