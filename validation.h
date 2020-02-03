@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdio.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 void					check_file(char *line);
 void					check_figure(char *line);

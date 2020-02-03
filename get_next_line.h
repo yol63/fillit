@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 15:42:36 by romarash          #+#    #+#             */
-/*   Updated: 2019/10/16 22:30:07 by romarash         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:36:27 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include "./libft/libft.h"
+# include "libft.h"
 
 int	get_next_line(const int fd, char **line);
 

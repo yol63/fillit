@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 18:47:19 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/29 13:07:45 by romarash         ###   ########.fr       */
+/*   Updated: 2020/02/01 18:55:26 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include "validation.h"
 
-# include "libft/libft.h"
+# include "libft.h"
 # include "get_next_line.h"
 
 typedef struct	s_tetraminka

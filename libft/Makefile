@@ -2,6 +2,8 @@ NAME = libft.a
 
 INCLUDES = libft.h
 
+INCP = ./
+
 SRC	= 	ft_memset.c \
 		ft_bzero.c \
 		ft_memcpy.c \
@@ -71,8 +73,8 @@ OBJ	= $(SRC:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME) : $(OBJ)
-	gcc -Wall -Werror -Wextra -c $(SRC) -I $(INCLUDES)
+$(NAME) : $(OBJ) $(INCLUDES)
+	gcc -Wall -Werror -Wextra -c $(SRC) -I $(INCP)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

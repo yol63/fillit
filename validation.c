@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 13:29:27 by romarash          #+#    #+#             */
-/*   Updated: 2020/01/31 18:23:41 by romarash         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:48:13 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ void		check_figure(char *line)
 	touch_validate(touch, line);
 }
 
-void		ft_line(char *line)
+void		ft_line(char **line)
 {
-	check_file(line);
-	check_figure(line);
-	free(line);
-	line = NULL;
+	check_file(*line);
+	check_figure(*line);
+	free(*line);
+	*line = NULL;
 	return ;
 }
 
@@ -98,21 +98,21 @@ int			creation(int fd)
 		ft_error(2);
 	if ((rd = read(fd, line, BUFF_SIZEE)) == 0)
 		return (ft_return(fd, &line, 0));
-	ft_line(line);
+	ft_line(&line);
 	while (rd == 20)
 	{
 		if (!(line = ft_strnew(1)))
 			ft_error(2);
 		if ((rd = read(fd, line, 1)) < 0)
 			ft_error(2);
-		free(line);
 		if (rd == 0)
-			return (1);
+			return (ft_return(fd, &line, 1));
+		free(line);
 		if (!(line = ft_strnew(BUFF_SIZEE)))
 			ft_error(2);
 		if ((rd = read(fd, line, BUFF_SIZEE)) < 0)
 			ft_error(2);
-		ft_line(line);
+		ft_line(&line);
 	}
 	return (0);
 }

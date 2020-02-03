@@ -6,7 +6,7 @@
 /*   By: romarash <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/11 18:09:50 by romarash          #+#    #+#             */
-/*   Updated: 2019/10/01 13:40:57 by romarash         ###   ########.fr       */
+/*   Updated: 2020/02/01 19:55:07 by romarash         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void				ft_free_arr(char **res);
 int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_isspace(int c);
+int					ft_sqrt(int nb);
 
 #endif

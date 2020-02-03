@@ -4,7 +4,6 @@ LIB_PATH = ./libft
 
 LIBFT = ./libft/libft.a
 
-HEAD = ./
 
 SRC =	get_next_line.c \
 	list.c \
@@ -16,7 +15,8 @@ SRC =	get_next_line.c \
 	
 HEAD_FILES =	get_next_line.h \
 		validation.h \
-		fillit.h 
+		fillit.h \
+		libft.h
 
 OBJ = $(SRC:.c=.o)
 
@@ -24,8 +24,8 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
-	gcc $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT) -I $(LIB_PATH)
+$(NAME): $(OBJ) $(LIBFT) $(HEAD_FILES)
+	gcc $(FLAGS) -o $(NAME) $(OBJ) -I ./ -L libft -lft
 
 $(LIBFT):
 	make -C libft/
